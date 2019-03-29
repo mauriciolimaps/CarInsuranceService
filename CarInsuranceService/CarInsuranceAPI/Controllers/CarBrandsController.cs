@@ -67,7 +67,7 @@ namespace CarInsuranceAPI
 			return CarBrands;
 		}
 
-
+		// GET api/insurance/cars/brands/{brand}
 		public IEnumerable<string> Get(string brand)
 		{
 			IEnumerable<String> FilteredModels;
