@@ -1,7 +1,29 @@
 ﻿(() => {
+    const carBrands = {
+
+        retrieve: async () => {
+            const brands = await $.when($.ajax('/api/insurance/cars/brands'))
+            brands.sort((x, y) => {
+                if (x.Name < y.Name) return -1
+                if (x.Name > y.Name) return +1
+                return 0
+            })
+
+            let items = []
+            for (brand of brands) {
+                let normalizedName = brand.Name.slice(0, 1).toUpperCase() + brand.Name.slice(1).toLowerCase()
+                items.push( { BrandID : brand.BrandID, Name : normalizedName } )
+            }
+
+            return items
+        }
+    }
+
     const carModels = {
 
-        populate: (models) => {
+        filter: async (brandID) => {
+            const models = await $.when($.ajax('/api/insurance/cars/brands/' + brandID, { cache: false }))
+       
             models.sort()
 
             let items = []
@@ -13,64 +35,48 @@
                     if (word.length > 3) word = word.slice(0, 1).toUpperCase() + word.slice(1).toLowerCase()
                     normalizedName.push(word)
                 }
-                items.push(`<option value="1">${normalizedName.join(' ')}</option>`)
+                items.push(normalizedName.join(' '))
             }
-            $('#car-models')
-                .html('')
-                .html(items.join('\n'))
-                .selectpicker('refresh')
-        },
 
-        filter: (brandID) => {
-            let models
-
-            $.ajax('/api/insurance/cars/brands/' + brandID, { cache: false })
-                .done((models) => {
-                    carModels.populate(models)
-
-                    const element = $('[data-id="car-models"]')
-                    if ((element.length)) {
-                        const dropdown = element.siblings('.dropdown-menu')
-                        if (dropdown.is(':hidden')) {
-                            element.dropdown('toggle')
-                            dropdown.find('input').val('').focus()
-                        }
-                    }
-                })
+            return items
         }
     }
 
-
-    $(document).ready(() => {
+    async function Ready() {
         $.fn.selectpicker.Constructor.DEFAULTS = {
             ...$.fn.selectpicker.Constructor.DEFAULTS,
-            noneResultsText : 'Nenhum resultado encontrado'
+            noneResultsText: 'Nenhum resultado encontrado'
         }
-            
-        $('#car-brands').change((value) => {
-            const selectedBrand = $('#car-brands').val()
-            if (!selectedBrand)
-                return
 
-            carModels.filter(selectedBrand)
-        })
+        const brands = await carBrands.retrieve()
+        $('#car-brands')
+            .append(brands.map( (brand) => `<option value="${brand.BrandID}">${brand.Name}</option>` ).join('\n'))
+            .selectpicker('refresh')
+            .change(async (value) => {
+                const selectedBrand = $('#car-brands').val()
+                if (!selectedBrand)
+                    return
 
-        $.ajax('/api/insurance/cars/brands')
-            .done((brands) => {
-                brands.sort((x, y) => {
-                    if (x.Name < y.Name) return -1
-                    if (x.Name > y.Name) return 1
-                    return 0
-                })
+                models = await carModels.filter(selectedBrand)
+                $('#car-models')
+                    .html('')
+                    .html(models
+                        .map((model) => `<option>${model}</option>`)
+                        .join('\n'))
+                    .selectpicker('refresh')
 
-                let items = []
-                for (brand of brands) {
-                    let normalizedName = brand.Name.slice(0, 1).toUpperCase() + brand.Name.slice(1).toLowerCase()
-                    items.push(`<option value="${brand.BrandID}">${normalizedName}</option>`)
+                const element = $('[data-id="car-models"]')
+                if ((element.length)) {
+                    const dropdown = element.siblings('.dropdown-menu')
+                    if (dropdown.is(':hidden')) {
+                        element.dropdown('toggle')
+                        dropdown.find('input').val('').focus()
+                    }
                 }
-                $('#car-brands').append(items.join('\n'))
             })
-    })
+    }
 
+    $(document).ready(() => (Ready()))
+    //$(document).ready(Ready)
 })()
 
