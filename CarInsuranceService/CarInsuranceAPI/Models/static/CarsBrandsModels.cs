@@ -82,5 +82,5 @@ namespace CarInsuranceAPI.Models
 			return from value in this.models select value.Name;
 		}
 	}
-	
+
 }

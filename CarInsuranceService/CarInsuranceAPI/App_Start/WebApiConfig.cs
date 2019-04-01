@@ -14,13 +14,13 @@ namespace CarInsuranceAPI
 
 			config.Routes.MapHttpRoute(
 				name			: "Brands",
-				routeTemplate	: "api/insurance/cars/brands",
+				routeTemplate	: "insurance/cars/brands",
 				defaults		: new { controller = "CarBrands" }
 			);
 
 			config.Routes.MapHttpRoute(
 				name			: "BrandsModels",
-				routeTemplate	: "api/insurance/cars/brands/{brand}",
+				routeTemplate	: "insurance/cars/brands/{brand}",
 				defaults		: new { controller = "CarBrands" }
 			);
 
