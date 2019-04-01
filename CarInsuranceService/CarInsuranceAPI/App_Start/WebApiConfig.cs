@@ -15,13 +15,19 @@ namespace CarInsuranceAPI
 			config.Routes.MapHttpRoute(
 				name			: "Brands",
 				routeTemplate	: "insurance/cars/brands",
-				defaults		: new { controller = "CarBrands" }
+				defaults		:  new { controller = "CarBrands" }
 			);
 
 			config.Routes.MapHttpRoute(
 				name			: "BrandsModels",
 				routeTemplate	: "insurance/cars/brands/{brand}",
-				defaults		: new { controller = "CarBrands" }
+				defaults		:  new { controller = "CarBrands" }
+			);
+
+			config.Routes.MapHttpRoute(
+				name			: "Coverages",
+				routeTemplate	: "insurance/cars/coverages",
+				defaults		:  new { controller = "Coverages" }	
 			);
 
 			config.Formatters.JsonFormatter.SupportedMediaTypes

@@ -42,11 +42,31 @@
         }
     }
 
+    const carCoverages = {
+
+        retrieve: async () => {
+            const coverages = await $.when($.ajax('/api/insurance/cars/coverages'))
+
+            return coverages
+        }
+    }
+
     async function Ready() {
+        async function coveragesLoadItems() {
+            const coverages = await carCoverages.retrieve()
+            $('#car-coverages')
+                .append(coverages
+                    .map((coverage) => `<option>${coverage.description}</option>`)
+                    .join('\n')
+                )
+        }
+
         $.fn.selectpicker.Constructor.DEFAULTS = {
             ...$.fn.selectpicker.Constructor.DEFAULTS,
             noneResultsText: 'Nenhum resultado encontrado'
         }
+
+        coveragesLoadItems()
 
         const brands = await carBrands.retrieve()
         $('#car-brands')

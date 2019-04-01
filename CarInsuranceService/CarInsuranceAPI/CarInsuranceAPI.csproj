@@ -86,11 +86,13 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\CarBrandsController.cs" />
+    <Compile Include="Controllers\CoveragesController.cs" />
     <Compile Include="general.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\static\CarsBrandsModels.cs" />
+    <Compile Include="Models\static\CarCoverages.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
