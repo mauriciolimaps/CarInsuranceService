@@ -18,11 +18,57 @@
       <hr/>
     </div>
 
-    <div class="row-fluid">
-      <select class="selectpicker"  data-show-subtext="false"  data-live-search="true"  id="car-brands">
-      </select>
-      <select class="selectpicker"  data-show-subtext="false"  data-live-search="true"  id="car-models">
-      </select>
-   </div>
+    <form>
+        <div class="form-group">
+            <label for="name">Nome</label>
+            <input type="text" class="form-control" id="name" placeholder="nome completo">
+        </div>
+        <div class="form-group">
+            <label for="cpf">CPF</label>
+            <input type="text" class="form-control" id="cpf" placeholder="123456789-12">
+        </div>
+        <div class="form-group">
+            <label for="address">Endereço</label>
+            <input type="text" class="form-control" id="address" placeholder="Endereço completo com bairro e município">
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-3">
+                <label for="plate"      class="col-form-label">Placa</label>
+                <div >
+                    <input type="text"  class="form-control" id="plate" placeholder="AAA-1234">
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <label for="car-brands" class="col-form-label">Marca</label>
+                <div>
+                    <select class="selectpicker form-control"  data-show-subtext="false"  data-live-search="true"  id="car-brands">
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <label for="car-models" class="col-form-label">Modelo</label>
+                <select class="selectpicker form-control"  data-show-subtext="false"  data-live-search="true"  id="car-models">
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="coverage" class="col-form-label">Cobertura</label>
+            <select class="form-control form-control-lg">
+                <option>Seguro Completo</option>
+                <option>Seguro Auto Roubo</option>
+                <option>Seguro Completo</option>
+                <option>Seguro para terceiros</option>
+                <option>Seguro de acidentes para passageiros</option>
+            </select>
+        </div>
+        <div style="text-align : center">
+            <button type="submit" class="btn btn-primary btn-lg"  type="submit" >
+                <span>
+                    Solicitar Cotação do Seguro
+                </span>
+                <i class="icon-ok" style="font-size:30px; vertical-align: middle;"></i>
+            </button>
+        </div>
+    </form>
   </div>
 </html>
