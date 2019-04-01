@@ -61,39 +61,43 @@
                 )
         }
 
+        async function brandsLoadItems() {
+            const brands = await carBrands.retrieve()
+            $('#car-brands')
+                .append(brands.map((brand) => `<option value="${brand.BrandID}">${brand.Name}</option>`).join('\n'))
+                .selectpicker('refresh')
+                .change(async (value) => {
+                    const selectedBrand = $('#car-brands').val()
+                    if (!selectedBrand)
+                        return
+
+                    models = await carModels.filter(selectedBrand)
+                    $('#car-models')
+                        .html('')
+                        .html(models
+                            .map((model) => `<option>${model}</option>`)
+                            .join('\n'))
+                        .selectpicker('refresh')
+
+                    const element = $('[data-id="car-models"]')
+                    if ((element.length)) {
+                        const dropdown = element.siblings('.dropdown-menu')
+                        if (dropdown.is(':hidden')) {
+                            element.dropdown('toggle')
+                            dropdown.find('input').val('').focus()
+                        }
+                    }
+                })
+        }
+
         $.fn.selectpicker.Constructor.DEFAULTS = {
             ...$.fn.selectpicker.Constructor.DEFAULTS,
             noneResultsText: 'Nenhum resultado encontrado'
         }
 
         coveragesLoadItems()
+        brandsLoadItems()
 
-        const brands = await carBrands.retrieve()
-        $('#car-brands')
-            .append(brands.map( (brand) => `<option value="${brand.BrandID}">${brand.Name}</option>` ).join('\n'))
-            .selectpicker('refresh')
-            .change(async (value) => {
-                const selectedBrand = $('#car-brands').val()
-                if (!selectedBrand)
-                    return
-
-                models = await carModels.filter(selectedBrand)
-                $('#car-models')
-                    .html('')
-                    .html(models
-                        .map((model) => `<option>${model}</option>`)
-                        .join('\n'))
-                    .selectpicker('refresh')
-
-                const element = $('[data-id="car-models"]')
-                if ((element.length)) {
-                    const dropdown = element.siblings('.dropdown-menu')
-                    if (dropdown.is(':hidden')) {
-                        element.dropdown('toggle')
-                        dropdown.find('input').val('').focus()
-                    }
-                }
-            })
     }
 
     $(document).ready(() => (Ready()))
