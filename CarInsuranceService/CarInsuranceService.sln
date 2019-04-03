@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarInsuranceAPI", "CarInsur
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarInsuranceStatic", "CarInsuranceStatic\CarInsuranceStatic.csproj", "{EE48454A-5CE7-4126-8413-8770EF1B2C82}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarInsuranceBridge", "CarInsuranceBridge\CarInsuranceBridge.csproj", "{A996BECE-603E-4C87-A4FA-FCA81CF63CB7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{EE48454A-5CE7-4126-8413-8770EF1B2C82}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE48454A-5CE7-4126-8413-8770EF1B2C82}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE48454A-5CE7-4126-8413-8770EF1B2C82}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A996BECE-603E-4C87-A4FA-FCA81CF63CB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A996BECE-603E-4C87-A4FA-FCA81CF63CB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A996BECE-603E-4C87-A4FA-FCA81CF63CB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A996BECE-603E-4C87-A4FA-FCA81CF63CB7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
